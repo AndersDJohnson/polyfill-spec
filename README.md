@@ -8,7 +8,9 @@ This allows downstream code to check for a possibly polyfilled feature, whose im
 
 ## Use Case
 
-In a recent project, we used [Respond.js](https://github.com/scottjehl/Respond) to support media queries for older browsers. It relies on the [matchMedia.js](https://github.com/paulirish/matchMedia.js) polyfill to determine whether media queries are supported in the browser. It always returned `false` in older browsers, which indicated to Respond that it should polyfill. But other code in the project wanted to use the more conformant  [media-match](https://github.com/weblinc/media-match) polyfill to keep responsive JavaScript behavior in sync with responsive CSS styles. It would have fooled Respond into thinking media queries were supported, so that Respond would not polyfill. So we modified matchMedia.js to set the `polyfill` property, and media-match to detect this, then override with its polyfill.
+In a recent project, we used [Respond.js](https://github.com/scottjehl/Respond) to support media queries for older browsers. It relies on the [matchMedia.js](https://github.com/paulirish/matchMedia.js) polyfill to determine whether media queries are supported in the browser. The fact that matchMedia.js always returns `false` for tests of media queries in older browsers is what Respond uses to know that it should polyfill.
+But other code in the project wanted to use the more conformant  [media-match](https://github.com/weblinc/media-match) polyfill to keep responsive JavaScript behavior in sync with responsive CSS styles. But media-match would have fooled Respond into thinking media queries were supported in older browsers, so that Respond would not polyfill.
+So we modified matchMedia.js to set the `polyfill` property, and modified media-match to detect this so that would could then override with its implementation.
 
 
 ## Proposal
