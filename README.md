@@ -4,7 +4,7 @@
 
 Polyfills are great. But they do not always conform perfectly to the behavior of the features they emulate. This can mislead downstream code, whose feature detection might result in an assumption of full conformance. We need a standard so that polyfills can be identified as such.
 
-This allows downstream code to check for a possibly polyfilled feature, whose implementation and level of conformance is unknown to it, and then in those cases, choose whether to opt instead to use a preferred implementation.
+This allows downstream code to check for a possibly polyfilled feature, whose implementation and level of conformance is unknown to it, and then in those cases, choose whether to opt instead to use a preferred implementation, or use fallback behavior.
 
 ## Proposal
 
