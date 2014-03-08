@@ -6,6 +6,11 @@ Polyfills are great. But they do not always conform perfectly to the behavior of
 
 This allows downstream code to check for a possibly polyfilled feature, whose implementation and level of conformance is unknown to it, and then in those cases, choose whether to opt instead to use a preferred implementation, or use fallback behavior.
 
+## Use Case
+
+In a recent project, we used [Respond.js](https://github.com/scottjehl/Respond) to support media queries for older browsers. It relies on the [matchMedia.js](https://github.com/paulirish/matchMedia.js) polyfill to determine whether media queries are supported in the browser. It always returned `false` in older browsers, which indicated to Respond that it should polyfill. But other code in the project wanted to use the more conformant  [media-match](https://github.com/weblinc/media-match) polyfill to keep responsive JavaScript behavior in sync with responsive CSS styles. It would have fooled Respond into thinking media queries were supported, so that Respond would not polyfill. So we modified matchMedia.js to set the `polyfill` property, and media-match to detect this, then override with its polyfill.
+
+
 ## Proposal
 
 Polyfill implementations should expose a `polyfill` property with a value of `true`.
